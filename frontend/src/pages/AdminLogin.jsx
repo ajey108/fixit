@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 
 import { toast } from "react-toastify";
+const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
 const AdminLogin = () => {
   const [email, setEmail] = useState("");
@@ -12,13 +13,10 @@ const AdminLogin = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/admin/login",
-        {
-          email,
-          password,
-        }
-      );
+      const response = await axios.post(`${backendUrl}/api/admin/login`, {
+        email,
+        password,
+      });
       console.log("Login response from admin:", response);
 
       if (response.data.success) {

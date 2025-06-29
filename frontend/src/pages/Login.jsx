@@ -5,7 +5,8 @@ import { toast } from "react-toastify";
 import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
-  let backendUrl = import.meta.env.VITE_BACKEND_URL;
+  const backendUrl =
+    import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

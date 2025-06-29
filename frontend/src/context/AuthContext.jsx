@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 
 const AuthContext = createContext();
+const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token") || "");
@@ -39,7 +40,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/issue/allIssues")
+      .get(`${backendUrl}/api/issue/allIssues`)
       .then((res) => {
         setIssues(res.data);
         console.log("issue from authcontext", res.data.issues);

@@ -4,6 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { toast } from "react-toastify";
 import Navbar from "../components/Navbar";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 const Issue = () => {
   const [form, setForm] = useState({
     title: "",
@@ -66,7 +67,7 @@ const Issue = () => {
       }
 
       const res = await axios.post(
-        "http://localhost:5000/api/issue/createissue",
+        `${backendUrl}/api/issue/createissue`,
         formData,
         {
           headers: {

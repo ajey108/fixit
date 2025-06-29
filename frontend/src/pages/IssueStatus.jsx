@@ -3,7 +3,7 @@ import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-toastify";
 import Navbar from "../components/Navbar";
-
+const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 const IssueStatus = () => {
   const { token } = useAuth();
   const [complaints, setComplaints] = useState([]);
@@ -12,10 +12,9 @@ const IssueStatus = () => {
   useEffect(() => {
     const fetchComplaints = async () => {
       try {
-        const res = await axios.get(
-          "http://localhost:5000/api/issue/myIssues",
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
+        const res = await axios.get(`${backendUrl}/api/issue/myIssues`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         setComplaints(res.data.issues);
       } catch (err) {
         toast.error("Failed to fetch your complaints");

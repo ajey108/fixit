@@ -4,7 +4,7 @@ import { FiMapPin } from "react-icons/fi";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-toastify";
-
+const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 const IssueCard = ({ issue }) => {
   const { title, description, image, location, tags, upvotes = [] } = issue;
   const { token, user } = useAuth();
@@ -25,7 +25,7 @@ const IssueCard = ({ issue }) => {
     setLoading(true);
     try {
       await axios.post(
-        "http://localhost:5000/api/issue/upvote",
+        `${backendUrl}/api/issue/upvote`,
         { issueId: issue._id },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -50,7 +50,7 @@ const IssueCard = ({ issue }) => {
         <img
           src={
             image
-              ? `http://localhost:5000${image}`
+              ? `${backendUrl}${image}`
               : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0q3u_1gY-5AMD74XArOlxyxhSN_1TFxxhMA&s"
           }
           alt={title}
