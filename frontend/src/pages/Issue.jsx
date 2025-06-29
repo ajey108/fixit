@@ -78,6 +78,16 @@ const Issue = () => {
 
       console.log("Response:", res.data);
       toast.success("Complaint created successfully!");
+      setForm({
+        title: "",
+        description: "",
+        city: "",
+        zip: "",
+        lat: "",
+        lng: "",
+        tags: [],
+        image: null,
+      });
     } catch (err) {
       console.error("Error submitting complaint:", err);
       alert(err.response?.data?.error || "Submission failed");
