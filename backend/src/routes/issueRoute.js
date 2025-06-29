@@ -5,7 +5,8 @@ import {
   allIssues,
   myIssue,
   toggleUpvote,
-  deleteComplaint,
+  deleteIssue,
+  updateIssueStatus,
 } from "../controllers/issueController.js";
 
 import upload from "../utils/multerConfig.js";
@@ -24,6 +25,8 @@ router.post("/upvote", authMiddleware, toggleUpvote); //upvote
 //get route
 router.get("/allIssues", allIssues);
 router.get("/myIssues", authMiddleware, myIssue);
-router.delete("/delete/:id", adminAuth, deleteComplaint);
+
+router.delete("/delete/:id", adminAuth, deleteIssue);
+router.put("/update/:id/status", adminAuth, updateIssueStatus);
 
 export default router;

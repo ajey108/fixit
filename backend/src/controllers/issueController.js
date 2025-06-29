@@ -110,7 +110,7 @@ export const toggleUpvote = async (req, res) => {
 };
 
 //delete complaint #Admin
-export const deleteComplaint = async (req, res) => {
+export const deleteIssue = async (req, res) => {
   console.log(req.params);
   try {
     const { id } = req.params;
@@ -124,5 +124,51 @@ export const deleteComplaint = async (req, res) => {
   } catch (err) {
     console.error("Delete issue error:", err);
     res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Update complaint status #Admin
+export const updateIssueStatus = async (req, res) => {
+  console.log("status payload", req.params, req.body);
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+    console.log("Updating complaint ID:", id);
+    console.log("New status:", status);
+
+    // Validate presence
+    if (!status) {
+      return res.status(400).json({ message: "Status is required" });
+    }
+
+    // Validate status values
+    const validStatuses = ["Pending", "In Progress", "Resolved"];
+    if (!validStatuses.includes(status)) {
+      return res.status(400).json({
+        message: "Invalid status",
+        validStatuses, // return valid statuses
+      });
+    }
+
+    const updatedissue = await Issue.findByIdAndUpdate(
+      id,
+      { status },
+      { new: true, runValidators: true } //retrun the updated document and validate
+    );
+
+    if (!updatedissue) {
+      return res.status(404).json({ message: "Issue not found" });
+    }
+
+    res.json({
+      success: true,
+      data: updatedissue,
+    });
+  } catch (error) {
+    console.error("Update error:", error);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
