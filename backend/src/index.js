@@ -2,7 +2,9 @@ import express, { urlencoded } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import connectDB from "./lib/db.js";
-
+import userRoute from "./routes/userRoute.js";
+import issueRoute from "./routes/issueRoute.js";
+import path from "path";
 dotenv.config();
 const app = express();
 
@@ -10,6 +12,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(urlencoded({ extended: true }));
+app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 //Db connection
 connectDB();
@@ -20,6 +23,8 @@ app.get("/", (req, res) => {
 });
 
 //sub-routes
+app.use("/api/auth/", userRoute);
+app.use("/api/issue/", issueRoute);
 
 //server listen
 const PORT = process.env.PORT || 5000;
