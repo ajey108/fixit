@@ -4,6 +4,7 @@ import cors from "cors";
 import connectDB from "./lib/db.js";
 import userRoute from "./routes/userRoute.js";
 import issueRoute from "./routes/issueRoute.js";
+import adminRoute from "./routes/adminRoute.js";
 import path from "path";
 dotenv.config();
 const app = express();
@@ -25,6 +26,8 @@ app.get("/", (req, res) => {
 //sub-routes
 app.use("/api/auth/", userRoute);
 app.use("/api/issue/", issueRoute);
+app.use("/api/admin", adminRoute); //adminLogin
+app.use("/api/admin", issueRoute); //admin delete and update
 
 //server listen
 const PORT = process.env.PORT || 5000;
