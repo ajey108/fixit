@@ -10,7 +10,7 @@ dotenv.config();
 const app = express();
 
 //middlewares
-app.use(cors());
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 app.use(urlencoded({ extended: true }));
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
