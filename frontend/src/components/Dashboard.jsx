@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-
+const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 const Dashboard = () => {
   const token = localStorage.getItem("token");
   console.log("token from dashboard", token);
@@ -12,7 +12,7 @@ const Dashboard = () => {
   //fetch complaints
   const fetchComplaints = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/issue/allIssues");
+      const res = await axios.get(`${backendUrl}/api/issue/allIssues`);
       setComplaints(res.data.issues);
     } catch (err) {
       console.error("Error fetching complaints", err);

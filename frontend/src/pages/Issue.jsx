@@ -4,6 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { toast } from "react-toastify";
 import Navbar from "../components/Navbar";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 const Issue = () => {
   const [form, setForm] = useState({
     title: "",
@@ -66,7 +67,7 @@ const Issue = () => {
       }
 
       const res = await axios.post(
-        "http://localhost:5000/api/issue/createissue",
+        `${backendUrl}/api/issue/createissue`,
         formData,
         {
           headers: {
@@ -78,6 +79,16 @@ const Issue = () => {
 
       console.log("Response:", res.data);
       toast.success("Complaint created successfully!");
+      setForm({
+        title: "",
+        description: "",
+        city: "",
+        zip: "",
+        lat: "",
+        lng: "",
+        tags: [],
+        image: null,
+      });
     } catch (err) {
       console.error("Error submitting complaint:", err);
       alert(err.response?.data?.error || "Submission failed");
