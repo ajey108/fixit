@@ -11,6 +11,7 @@ import PrivateRoute from "./components/PrivateRoutes";
 import IssueStatus from "./pages/IssueStatus";
 import AdminLogin from "./pages/AdminLogin";
 import Dashboard from "./components/Dashboard";
+import Newsletter from "./components/Newsletter";
 const App = () => {
   return (
     <>
@@ -43,6 +44,7 @@ const App = () => {
             <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
         </BrowserRouter>
+        <Newsletter />
         <Footer />
       </AuthProvider>
     </>

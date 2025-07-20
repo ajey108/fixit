@@ -3,6 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import Banner from "../components/Banner";
 
 const TAGS = ["All", "Electricity", "Water", "Road", "Garbage", "Other"];
 
@@ -35,6 +36,7 @@ const Home = () => {
   return (
     <>
       <Navbar />
+      <Banner />
       <div className="min-h-screen ">
         <div className="my-10">
           <ul className="flex items-center justify-center gap-3 text-lg font-semibold text-green-700 ">

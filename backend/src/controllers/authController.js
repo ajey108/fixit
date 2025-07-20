@@ -51,6 +51,7 @@ export const Register = async (req, res) => {
 export const Login = async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log("req.body", req.body);
 
     if (!email || !password) {
       return res.status(400).json({ message: "all fields are required" });
@@ -59,7 +60,7 @@ export const Login = async (req, res) => {
     //find user
     const user = await User.findOne({ email });
     if (!user) {
-      res.status(400).json({ message: "Something went wrong" });
+      return res.status(400).json({ message: "Something went wrong" });
     }
 
     //compare password
